@@ -6,6 +6,7 @@ import Button from "../../components/ui/Button";
 import ErrorAlert from "../../components/ui/ErrorAlert";
 import { getFilteredEvents } from "../../helpers/api-util";
 import useSWR from "swr";
+import Head from "next/head";
 
 function FilteredEventsPage(props) {
   const [loadedEvents, setLoadedEvents] = useState();
@@ -86,6 +87,13 @@ function FilteredEventsPage(props) {
   const date = new Date(numYear, numMonth - 1);
   return (
     <Fragment>
+      <Head>
+        <title>Filtered Events</title>
+        <meta
+          name="description"
+          content={`All events for ${numMonth}/${numYear}.`}
+        />
+      </Head>
       <ResultsTitle date={date} />
       <EventList items={filteredEvents} />
     </Fragment>
