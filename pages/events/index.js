@@ -6,20 +6,25 @@ import { getAllEvents } from "../../helpers/api-util";
 import Head from "next/head";
 
 function AllEventsPage(props) {
-  const events = props.events;
   const router = useRouter();
+  const { events } = props;
 
   function findEventsHandler(year, month) {
     const fullPath = `/events/${year}/${month}`;
+
     router.push(fullPath);
   }
+
   return (
     <Fragment>
       <Head>
+        <title>All my events</title>
+      </Head>
+      <Head>
         <title>All Events</title>
         <meta
-          name="description"
-          content="Find a lot of great events that allow you to envolve..."
+          name='description'
+          content='Find a lot of great events that allow you to evolve...'
         />
       </Head>
       <EventsSearch onSearch={findEventsHandler} />
@@ -35,7 +40,7 @@ export async function getStaticProps() {
     props: {
       events: events,
     },
-    revalidate: 60,
+    revalidate: 60
   };
 }
 

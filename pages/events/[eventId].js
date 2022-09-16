@@ -17,12 +17,13 @@ function EventDetailPage(props) {
       </div>
     );
   }
+
   return (
     <Fragment>
       <Head>
         <title>{event.title}</title>
         <meta
-          name="description"
+          name='description'
           content={event.description}
         />
       </Head>
@@ -31,12 +32,12 @@ function EventDetailPage(props) {
         date={event.date}
         address={event.location}
         image={event.image}
-        imageAlt={event.imageAlt}
+        imageAlt={event.title}
       />
       <EventContent>
         <p>{event.description}</p>
       </EventContent>
-      <Comments eventId={event.id}></Comments>
+      <Comments eventId={event.id} />
     </Fragment>
   );
 }
@@ -48,19 +49,20 @@ export async function getStaticProps(context) {
 
   return {
     props: {
-      selectedEvent: event,
+      selectedEvent: event
     },
-    revalidate: 30,
+    revalidate: 30
   };
 }
 
 export async function getStaticPaths() {
   const events = await getFeaturedEvents();
 
-  const paths = events.map((event) => ({ params: { eventId: event.id } }));
+  const paths = events.map(event => ({ params: { eventId: event.id } }));
+
   return {
     paths: paths,
-    fallback: "blocking",
+    fallback: 'blocking'
   };
 }
 

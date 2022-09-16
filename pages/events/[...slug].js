@@ -8,6 +8,7 @@ import { getFilteredEvents } from "../../helpers/api-util";
 import useSWR from "swr";
 import Head from "next/head";
 
+
 function FilteredEventsPage(props) {
   const [loadedEvents, setLoadedEvents] = useState();
   const router = useRouter();
@@ -16,7 +17,6 @@ function FilteredEventsPage(props) {
 
   const { data, error } = useSWR(
     "https://nextjs-course-78d87-default-rtdb.firebaseio.com/events.json",
-    (url) => fetch(url).then((res) => res.json())
   );
 
   useEffect(() => {
@@ -37,7 +37,7 @@ function FilteredEventsPage(props) {
   let pageHeadData = (
     <Head>
       <title>Filtered Events</title>
-      <meta name="description" content={`A list of filtered events`} />
+      <meta name='description' content={`A list of filtered events.`} />
     </Head>
   );
 
@@ -45,7 +45,7 @@ function FilteredEventsPage(props) {
     return (
       <Fragment>
         {pageHeadData}
-        <p className="center">Loading...</p>
+        <p className='center'>Loading...</p>
       </Fragment>
     );
   }
@@ -60,7 +60,7 @@ function FilteredEventsPage(props) {
     <Head>
       <title>Filtered Events</title>
       <meta
-        name="description"
+        name='description'
         content={`All events for ${numMonth}/${numYear}.`}
       />
     </Head>
@@ -79,10 +79,10 @@ function FilteredEventsPage(props) {
       <Fragment>
         {pageHeadData}
         <ErrorAlert>
-          <p>Invalid filter. Please adjust your value</p>
+          <p>Invalid filter. Please adjust your values!</p>
         </ErrorAlert>
-        <div className="center">
-          <Button link="/events">Show All Events</Button>
+        <div className='center'>
+          <Button link='/events'>Show All Events</Button>
         </div>
       </Fragment>
     );
@@ -101,16 +101,17 @@ function FilteredEventsPage(props) {
       <Fragment>
         {pageHeadData}
         <ErrorAlert>
-          <p>No events found for the chosen filter</p>
+          <p>No events found for the chosen filter!</p>
         </ErrorAlert>
-        <div class="center">
-          <Button link="/events">Show All Events</Button>
+        <div className='center'>
+          <Button link='/events'>Show All Events</Button>
         </div>
       </Fragment>
     );
   }
 
   const date = new Date(numYear, numMonth - 1);
+
   return (
     <Fragment>
       {pageHeadData}
@@ -122,6 +123,7 @@ function FilteredEventsPage(props) {
 
 // export async function getServerSideProps(context) {
 //   const { params } = context;
+
 //   const filterData = params.slug;
 
 //   const filteredYear = filterData[0];
@@ -139,12 +141,10 @@ function FilteredEventsPage(props) {
 //     numMonth > 12
 //   ) {
 //     return {
-//       props: {
-//         hasError: true,
-//       },
+//       props: { hasError: true },
 //       // notFound: true,
-//       // redirect:{
-//       //   destination:'error'
+//       // redirect: {
+//       //   destination: '/error'
 //       // }
 //     };
 //   }
